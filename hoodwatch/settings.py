@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'hood',
     'crispy_forms',
     'pyuploadcare.dj',
+    'bootstrap5'
 ]
 
 UPLOADCARE = {

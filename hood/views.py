@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import NeighbourHood, Profile, Business, Post
 from .forms import UpdateProfileForm, NeighbourHoodForm, PostForm
 from django.contrib.auth.models import User
-@login_required(login_url='login')
+# @login_required(login_url='login')
 def index(request):
     return render(request, 'index.html')
 def signup(request):
