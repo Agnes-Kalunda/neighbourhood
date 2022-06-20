@@ -1,5 +1,4 @@
 # neighbourhood
-# HomeWatch
 A python application based on Django framework
 #### [Agnes-Kalunda] 
 
