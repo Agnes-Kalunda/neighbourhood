@@ -29,8 +29,6 @@ def hoods(request):
         'all_hoods': all_hoods,
     }
     return render(request, 'all_hoods.html', params)
-
-
 def create_hood(request):
     if request.method == 'POST':
         form = NeighbourHoodForm(request.POST, request.FILES)
@@ -42,3 +40,51 @@ def create_hood(request):
     else:
         form = NeighbourHoodForm()
     return render(request, 'newhood.html', {'form': form})
+def single_hood(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=hood)
+    posts = Post.objects.filter(hood=hood)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            b_form = form.save(commit=False)
+            b_form.neighbourhood = hood
+            b_form.user = request.user.profile
+            b_form.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = BusinessForm()
+    params = {
+        'hood': hood,
+        'business': business,
+        'form': form,
+        'posts': posts
+    }
+    return render(request, 'single_hood.html', params)
+def hood_members(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    members = Profile.objects.filter(neighbourhood=hood)
+    return render(request, 'members.html', {'members': members})
+
+
+def create_post(request, hood_id):
+    hood = NeighbourHood.objects.get(id=hood_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.hood = hood
+            post.user = request.user.profile
+            post.save()
+            return redirect('single-hood', hood.id)
+    else:
+        form = PostForm()
+    return render(request, 'post.html', {'form': form})
+
+def join_hood(request, id):
+    neighbourhood = get_object_or_404(NeighbourHood, id=id)
+    request.user.profile.neighbourhood = neighbourhood
+    request.user.profile.save()
+    return redirect('hood')
+
