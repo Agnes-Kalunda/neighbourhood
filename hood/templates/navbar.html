@@ -33,26 +33,27 @@
 top: 0;transition: all 0.3s;
             ">
     <div class="sidebar-header ">
-        <h3><a href="{% url 'index' %}">Hood Watch</a></h3>
-        <strong><i class="fas fa-home"></i></strong>
+        <h3><a href="{% url 'index' %}" style="color: white; font-size: xx-large;">Hood Watch </a></h3>
+       
     </div>
     {% if user.is_authenticated %}
     <ul class="list-unstyled components mr-2 ml-2">
         <li class="mb-4">
-            <a href="{% url 'profile' user.username %}">
+            <a href="{% url 'profile' user.username %}" style="color: white">
                 <img class="rounded-circle nav-img"src="{{ user.profile.profile_picture.url }}" alt="">
+                <strong><i class="fas fa-home"></i></strong>
                 &nbsp; Profile
             </a>
 
         </li>
         <li class="mb-4">
-            <a href="{% url 'edit-profile' user.username %}">
+            <a href="{% url 'edit-profile' user.username %}" style="color:white">
                 <i class="fas fa-edit"></i>&nbsp;
                 &nbsp; Edit Profile
             </a>
         </li>
         <li class="mb-4">
-            <a href="{% url 'hood' %}">
+            <a href="{% url 'hood' %}" style="color:white">
                 <i class="fas fa-home"></i>&nbsp;
                 &nbsp; Hoods
             </a>
@@ -60,21 +61,21 @@ top: 0;transition: all 0.3s;
 
         {% if user.profile.neighbourhood %}
         <li class="mb-4">
-            <a href="{% url 'single-hood' user.profile.neighbourhood.id %}">
+            <a href="{% url 'single-hood' user.profile.neighbourhood.id %}" style="color: white;">
                 <i class="fas fa-paper-plane"></i>&nbsp;
                 &nbsp;{{user.profile.neighbourhood.name}}
             </a>
         </li>
         {% else %}
         <li class="mb-4">
-            <a href=""> &nbsp;
+            <a href="" style="color:white"> &nbsp;
                 No Hood Yet
             </a>
         </li>
         {% endif %}
     </ul>
     <div class="logout ml-2 mr-2 ">
-        <a href="{% url 'logout' %}" class=""> Logout</a>
+        <a href="{% url 'logout' %}" style="color: red ; font-size: x-large;"class=""> Logout</a>
     </div>
 
     {% endif%}
