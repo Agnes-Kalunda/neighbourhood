@@ -18,3 +18,8 @@ class NeighbourHoodForm(forms.ModelForm):
     class Meta:
         model = NeighbourHood
         exclude = ('admin',)
+        
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('user', 'neighbourhood')
